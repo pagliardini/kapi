@@ -5,19 +5,19 @@ import pymssql
 app = Flask(__name__)
 CORS(app)
 
-# Configuración de la conexión a la base de datos SQL Server
+# Configuración de la conexión
 server = ''
 database = ''
 username = ''
 password = ''
 
-# Ruta para obtener todos los productos o buscar por codigo
+# Obtener todos los productos o buscar por codigo
 @app.route('/productos', methods=['GET', 'POST'])
 def get_productos():
     conn = pymssql.connect(server=server, user=username, password=password, database=database)
     cursor = conn.cursor(as_dict=True)
 
-    # Verificar si se proporciona un codigo para buscar
+    # Verificación de si se proporciona un codigo para buscar
     codigo = request.args.get('codigo')
     if codigo:
         cursor.execute('SELECT * FROM Productos WHERE Id_Producto = %s OR Id_Producto1 = %s OR Id_Producto2 = %s OR Id_Producto3 = %s', (codigo, codigo, codigo, codigo))
@@ -33,7 +33,7 @@ def get_productos():
             'id4': row['Id_Producto3'],
             'nombre': row['Descripcion'],
             'precio': row['Precio_Venta'],
-            # Agrega más columnas si es necesario
+            # Se pueden agregar mas columnas
         }
         productos.append(producto)
     conn.close()
