@@ -6,10 +6,10 @@ app = Flask(__name__)
 CORS(app)
 
 # Configuración de la conexión a la base de datos SQL Server
-server = '10.242.215.34'
-database = 'Kiosco'
-username = 'sa'
-password = 'nomeacuerdo.86'
+server = ''
+database = ''
+username = ''
+password = ''
 
 # Ruta para obtener todos los productos o buscar por codigo
 @app.route('/productos', methods=['GET', 'POST'])
